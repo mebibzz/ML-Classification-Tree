@@ -1,65 +1,65 @@
-# Decision Tree Regression
+# Classification Tree
  
-# Importing the libraries
-import numpy as np
+# Libraries import
+import NumPy as np
+import pandas as PD
 import matplotlib.pyplot as plt
-import pandas as pd
  
-# Importing the dataset
-dataset = pd.read_csv('Position_Salaries.csv')
+
+data = pd.read_csv('Position_Salaries.csv')
 print(data.shape)
 data.head()
 
 
-X = dataset.iloc[:, 1:2].values
-y = dataset.iloc[:, 2].values
+X = data.iloc[:, 1:2].values
+y = data.iloc[:, 2].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=40)
 print(X_train.shape)
 print(X_test.shape)
 
-# Fitting Decision Tree Regression to the dataset
+# adding classification Tree to the dataset
 
-from sklearn.tree import DecisionTreeRegressor
-dtree = DecisionTreeRegressor(max_depth=8, min_samples_leaf=0.13, random_state=3)
-dtree.fit(X_train, y_train)
+from sklearn.tree import ClassificationTree
+ctree = classificationTree(max_depth=8, min_samples_leaf=0.13, random_state=3)
+ctree.fit(X_train, y_train)
  
-# Predicting a new result
-pred_train_tree= dtree.predict(X_train)
+# Predicting the result
+pred_train_tree= ctree.predict(X_train)
 print(np.sqrt(mean_squared_error(y_train,pred_train_tree)))
 print(r2_score(y_train, pred_train_tree))
 
-pred_test_tree= dtree.predict(X_test)
+pred_test_tree= ctree.predict(X_test)
 print(np.sqrt(mean_squared_error(y_test,pred_test_tree))) 
 print(r2_score(y_test, pred_test_tree))
 
-Fit the regression tree 'dtree1' and 'dtree2' 
-dtree1 = DecisionTreeRegressor(max_depth=2)
-dtree2 = DecisionTreeRegressor(max_depth=5)
-dtree1.fit(X_train, y_train)
-dtree2.fit(X_train, y_train)
+the regression tree 'ctree0' and 'ctree01' 
+ctree0 = ClassificationTree(max_depth=2)
+ctree01 = ClassificationTree(max_depth=5)
+ctree0.fit(X_train, y_train)
+ctree01.fit(X_train, y_train)
 
-#Predict on training data
-tr1 = dtree1.predict(X_train)
-tr2 = dtree2.predict(X_train) 
+#training data predicting
+tr0 = ctree0.predict(X_train)
+tr01 = ctree01.predict(X_train) 
 
 # Predict on testing data
-y1 = dtree1.predict(X_test)
-y2 = dtree2.predict(X_test) 
+y0 = ctree0.predict(X_test)
+y01 = ctree01.predict(X_test) 
 
-# Print RMSE and R-squared value for regression tree 'dtree1' on training data
-print(np.sqrt(mean_squared_error(y_train,tr1))) 
-print(r2_score(y_train, tr1))
+# Printing the RMSE and the R-squared value for regression tree 'ctree0' in training data
+print(np.sqrt(mean_squared_error(y_train,tr0))) 
+print(r2_score(y_train, tr0))
 
-# Print RMSE and R-squared value for regression tree 'dtree1' on testing data
-print(np.sqrt(mean_squared_error(y_test,y1))) 
-print(r2_score(y_test, y1)) 
+# Printing the RMSE and the R-squared value for regression tree 'ctree0' in testing data
+print(np.sqrt(mean_squared_error(y_test,y0))) 
+print(r2_score(y_test, y0)) 
  
-# Visualising the Decision Tree Regression results (higher resolution)
+# Visualising of the Classification Tree Regression result
 X_grid = np.arange(min(X), max(X), 0.01)
 X_grid = X_grid.reshape((len(X_grid), 1))
 plt.scatter(X, y, color = 'red')
 plt.plot(X_grid, regressor.predict(X_grid), color = 'blue')
-plt.title('Decision Tree Regression')
+plt.title('Classification Tree')
 plt.xlabel('Position level')
 plt.ylabel('Salary')
 plt.show()
